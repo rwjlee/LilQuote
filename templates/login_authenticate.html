@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block body %}
+
+<div class="row my-5">
+    <div class="col-6 offset-3">
+        <h3 class="text-center m-3">Login to LilQuote!</h3>
+        <form action="{{url_for('login')}}" method="POST">
+            <div class="form-group">
+                <h5>Email</h5>
+                <input type="email" class="form-control" name="html_email" id="" placeholder="email">
+            </div>
+            <div class="form-group">
+                <h5>Password</h5>
+                <input type="password" class="form-control"  name="html_password" id="" placeholder="password">
+            </div>
+            <button class="btn btn-primary">Login</button>
+        </form>
+    </div>
+</div>
+{% include 'errors.html' %}
+{% endblock %}

@@ -2,4 +2,47 @@
 
 {% block body %}  
 
+{% if session.user_id %}
+<h1>Hello {{session.username}}</h1>
+
+{% include 'login_page.html' %}
+
+{% for quote in quotes %}
+
+<div class="border border-secondary col-8 py-2 my-3">
+    {% if session.user_id==quote.user_id %}
+    <div class="row">
+        <a class="btn btn-danger" href="{{url_for('delete_quote', quote_id = quote.id)}}"> delete</a>
+    </div>
+    {% endif %}
+    <div class="col-6 border border-top-0 border-bottom-0 border-right-0 border-primary">{{quote.content}}</div>
+    <div class="row">
+        <div class="col-2"><a href="{{url_for('user_quotes', user_id = quote.user_id)}}">{{quote.user.username}}</a></div>
+        <div class="col-6">{{quote.created_at}}</div>
+    </div>
+</div>
+
+{% endfor %}
+
+{% else %}
+
+{% for quote in quotes %}
+
+<div class="border border-secondary col-8 py-2 my-3">
+    <div class="col-6 border border-top-0 border-bottom-0 border-right-0 border-primary">{{quote.content}}</div>
+    <div class="row">
+        <div class="col-2">
+            <a href="{{url_for('user_quotes', user_id = quote.user_id)}}">{{quote.user.username}}</a>
+        </div>
+        <div class="col-6">{{quote.created_at}}</div>
+    </div>
+</div>
+
+{% endfor %}
+
+{% endif %}
+
+
+
+
 {% endblock %}
